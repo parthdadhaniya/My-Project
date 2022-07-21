@@ -1,0 +1,37 @@
+{% load static %}
+<html>
+<head>
+    <style>
+        h1{
+            background-color: tomato;
+            color: white;
+            text-align: center;
+        }
+        p
+        {
+            background-color: blueviolet;
+            color: white;
+        }
+
+    </style>
+
+    {% block cssextra %}
+    {% endblock %}
+</head>
+<body>
+
+    <h1>Welcome to PYTHON DJANGO</h1>
+    
+    {% block maincontent %}
+        <p>This is main content </p>
+    {% endblock %}
+    
+
+    {% block sidebar %}
+        <p>Something else of base page </p>
+    {% endblock %}
+
+    <h1>THIS IS FOOTER</h1>
+
+</body>
+</html>
