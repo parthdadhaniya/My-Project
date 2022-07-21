@@ -1,0 +1,103 @@
+{% extends "enterprise/base.html" %}
+			<!-- start page content -->
+			{% block content %}
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Add Disease</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Diseases</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Add Disease</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                                <div class="card-head">
+                                    <header>Add disease information</header>
+                                     
+				                        
+                                </div>
+                                <div class="card-body" id="bar-parent">
+                                       
+                                    <form method="POST" action="{% url 'add_disease_indatabase' %}" id="form_sample_1" class="form-horizontal" >
+                                        {%csrf_token%}
+                                           
+                                        <div class="form-body">
+                                        <div class="form-group row">
+                                                <br>
+                                                <label class="control-label col-md-3">Disease Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="disease" data-required="1" placeholder="Enter disease name" class="form-control input-height" required /> </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Symptoms
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <textarea  rows="7" name="symptoms" placeholder="Enter sypmtoms separated by comma(,)" class="form-control" required /></textarea> </div>
+                                            </div>
+                                         <br>
+                                            <div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <input type="submit" class="btn btn-info" value="Add" name="update"></input>
+                                                    <a  href="{% url 'all_diseases' %}"class="btn btn-default" value="cancel" >Cancel</a>
+                                                </div>
+                                            	</div>
+                                            </div>
+                                            
+										</div>
+                                    </form>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     
+            <!-- Bootstrap modal -->
+            {% if message %}  
+	<div class="container">
+         
+            <div class="modal custom fade" id="duplicateModal" role="dialog">
+            <div class="modal-dialog">
+        
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h4 class="modal-title">Duplicate Data</h4>
+                </div>
+                <div class="modal-body">
+        
+                  <strong>Error: </strong> <pid="regEmail">{{message | title}}</p>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
+                </div>
+              </div>
+        
+            </div>
+          </div>
+        </div>
+        
+        <script>
+       $(window).on('load',function(){
+        $('#duplicateModal').modal({backdrop:true});
+    });
+        </script>
+			{% endif %}
+
+			{% endblock%}  
+       

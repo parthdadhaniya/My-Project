@@ -1,0 +1,94 @@
+{% extends "enterprise/base.html" %}
+			
+			{% block content %}
+           
+			 <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Edit Medicine</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Medicines</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Edit Medicine</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                                <div class="card-head">
+                                    <header>Medicine Information</header>
+                                     
+				                        
+                                </div>
+                                <div class="card-body" id="bar-parent">
+                                       
+                                    <form method="POST" action="{% url 'update_medicine' %}" id="form_sample_1" class="form-horizontal" >
+                                        <br><br>
+                                        {%csrf_token%}
+                                            {% if medicine_data %}
+                                        <div class="form-body">
+                                        <div class="form-group row">
+                                                <label class="control-label col-md-3">Medicine Id
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="id" data-required="1" value="{{medicine_data.id}}" class="form-control input-height" readonly /> </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Medicine Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="medicine" data-required="1" value="{{medicine_data.medicine_name}}" class="form-control input-height" required/> </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                    <label class="control-label col-md-3">Manufacturer Name
+                                                        <span class="required"> * </span>
+                                                    </label>
+                                                    <div class="col-md-5">
+                                                        <input type="text" name="manufacturer" data-required="1" value="{{medicine_data.pharma_name}}" class="form-control input-height" required /> </div>
+                                                </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Type
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="typemedicine" required>
+                                                        <option value="">Select...</option>
+                                                        <option selected="selected" value="Pills">Pills</option>
+                                                        <option value="Ointment">Ointment</option>
+                                                        <option value="Injection">Injection</option>
+                                                        <option value="Spray">Spray</option>
+                                                        <option value="Syrup">Syrup</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <input type="submit" class="btn btn-info" value="Update" name="update"></input>
+                                                    <a  href="{% url 'all_medicines' %}"class="btn btn-default" value="cancel" >Cancel</a>
+                                                </div>
+                                            	</div>
+                                            </div>
+                                            
+										</div>
+                                    </form>
+                                    {% else %}
+                                            <h4> No data found for this medicine..</h4>
+                                            {% endif%}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+{% endblock%}           
+			<!-- end page content -->

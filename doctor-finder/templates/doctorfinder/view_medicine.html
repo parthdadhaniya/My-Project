@@ -1,0 +1,227 @@
+
+{% extends "enterprise/base.html" %}
+{% block content%}
+
+
+    {% load static %}
+     <link href="{% static '/enterprise/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css"/>
+     <link href="{% static '/enterprise/js/datatables/jquery.dataTables.min.css' %}" rel="stylesheet" type="text/css"></script>
+	 <script src="{% static '/enterprise/js/datatables/datatables.min.js' %}" ></script>
+	 <script src="{% static '/enterprise/js/datatables/plugins/bootstrap/datatables.bootstrap.js' %}" ></script>
+	 <script src="{% static '/enterprise/js/table_data.js' %}" ></script>
+     <script src="{% static '/enterprise/js/print.js' %}" ></script>
+        
+			 
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Patient Case History</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tabbable-line">
+                                                           
+                               
+                                <div class="tab-content">
+                                    <div class="tab-pane active fontawesome-demo" id="tab1">
+                                        <div class="row">
+					                        <div class="col-md-12">
+					                            <div class="card card-topline-red">
+					                                <div class="card-head">
+                                                            <header>Medicines Prescribed for this case</header>
+					                                </div>
+					                                <div class="card-body ">
+					                                    <div class="row">
+					                                        <div class="col-md-6 col-sm-6 col-xs-6">
+					                                            <div class="btn-group">
+					                                                
+					                                            </div>
+					                                        </div>
+					                                        <div class="col-md-6 col-sm-6 col-xs-6">
+					                                            <div class="btn-group pull-right">
+					                                                <a class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+					                                                    <i class="fa fa-angle-down"></i>
+					                                                </a>
+					                                                <ul class="dropdown-menu pull-right">
+					                                                    <li>
+																				<a href="javascript:;" id="print1">
+																						<i class="fa fa-print"></i> Print </a>
+					                                                    </li>
+					                                                </ul>
+					                                            </div>
+					                                        </div>
+														</div>
+														
+														
+					                                    <table class="table table-striped table-bordered table-hover table-checkable order-column valign-middle" id="example4">
+                                                                <thead>
+                                                                        <tr>
+                                                                            <th>Medicines Prescribed</th>
+                                                                            <th>Type of Medicine</th>
+                                                                            <th>Pharmaceuticals</th>
+                                                                            
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                            {% if medication_info %}
+                                                                                {% for info in medication_info %}
+                                                                        <tr>
+                                                                           
+                                                                               
+                                                                            
+                                                                            <td>{{info.medicine_name}}</td>
+                                                                            <td>{{info.medicine_type| title}}</td>
+                                                                            <td >{{info.pharma_name}}</td>
+                                                                        </tr>
+                                                                        {% endfor %}
+                                                                        {% else %}
+                                                                        <h4>No medicine data available for this case</h4>
+                                                                        {% endif %}
+                                                                    </tbody>
+                                                                </tr>
+                                                                    </table>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+                                    </div>
+                                   
+                    					</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="tabbable-line">
+                                                                       
+                                           
+                                            <div class="tab-content">
+                                                <div class="tab-pane active fontawesome-demo" id="tab1">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="card card-topline-red">
+                                                                <div class="card-head">
+                                                                        <header>Report Data for Case</header>
+                                                                </div>
+                                                                <div class="card-body ">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                                                            <div class="btn-group">
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                                                            <div class="btn-group pull-right">
+                                                                                <a class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+                                                                                    <i class="fa fa-angle-down"></i>
+                                                                                </a>
+                                                                                <ul class="dropdown-menu pull-right">
+                                                                                    <li>
+                                                                                            <a href="javascript:;" id="print2">
+                                                                                                    <i class="fa fa-print"></i> Print </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    {% if reports_data %}
+                                                                    <table class="table table-striped table-bordered table-hover table-checkable order-column valign-middle" id="example1">
+                                                                            <thead>
+                                                                                    <tr>
+                                                                                        <th>Report id </th>
+                                                                                        <th>Type of report</th>
+                                                                                        <th>Report Uploaded</th>
+                                                                                        <th>Date of upload</th>
+                                                                                        <th>Diagnosis</th>
+                                                                                        <th>Comments</th>
+                                                                                        
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                        
+                                                                                            {% for info in reports_data %}
+                                                                                    <tr>
+                                                                                       
+                                                                                           
+                                                                                        
+                                                                                        <td>{{info.id}}</td>
+                                                                                        <td>{{info.report_type| title}}</td>
+                                                                                        <td ><a target="_blank" href="{{info.report_url.url}}">{{info.report_url}} </a></td>
+                                                                                        <td >{{info.report_date}}</td>
+                                                                                        <td >{{info.diagnosis}}</td>
+                                                                                        <td >{{info.comments}}</td>
+                                                                                    </tr>
+                                                                                    {% endfor %}
+                                                                                    
+                                                                                </tbody>
+                                                                            </tr>
+                                                                                </table>
+                                                                                {% else %}
+                                                                                    <h4>No Report data available for this case</h4>
+                                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="card card-box">
+                                                        <div class="card-head">
+                                                            <header>Case Detail</header>
+                                                             
+                                                                
+                                                        </div>
+                                                        <div class="card-body" id="bar-parent">
+                                                               
+                                                            <form  id="form_sample_1" class="form-horizontal" >
+                                                                {%csrf_token%}
+                                                                   
+                                                                <div class="form-body">
+                                                                <div class="form-group row">
+                                                                        
+                                                                    <div class="form-group">
+                                                                        <label class="control-label col-md-3">Last Prescription story for this case
+                                                                            <span class="required"> * </span>
+                                                                        </label>
+                                                                        <div class="col-md-5">
+                                                                            {% if report_info %}
+                                                                            <textarea  rows="7" name="symptoms"  class="form-control" readonly/>{{report_info.prescription}}</textarea> </div>
+                                                                          {% endif %}
+                                                                        </div>
+                                                                 <br>
+                                                                    <div class="form-actions">
+                                                                    <div class="row">
+                                                                        <div class="offset-md-3 col-md-9">
+                                                                            
+                                                                            <a  href="{% url 'all_patients' %}"class="btn btn-success" value="cancel" >Back</a>
+                                                                        </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </form>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                        </div>
+                   
+			<!-- end page content -->
+</div>
+   
+
+	
+{% endblock %}

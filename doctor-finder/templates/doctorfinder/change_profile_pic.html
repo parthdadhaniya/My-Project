@@ -1,0 +1,80 @@
+{% extends "doctortracker/settings_base.html" %}
+            <!-- start page content -->
+            {% load static %}
+			{% block content %}
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Change Avatar</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Settings</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Profile Settings</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Change Profile Picture</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                                <div class="card-head">
+                                    <header>Upload Picture</header>
+                                     
+				                        
+                                </div>
+                                <div class="card-body" id="bar-parent">
+                                        <div class="col-md-5">
+                                        <div class="profile-sidebar" style="position:relative;margin-top:81px;margin-left:309px;margin-bottom:81px;">
+                                                <div class="card card-topline-aqua">
+                                                    <div class="card-body no-padding height-9">
+                                                        <div class="row">
+                                                            <div class="profile-userpic">
+                                                                <img style="width:144px;height:144px;" id="myimage" src="{{request.session.profile_url}}" class="img-responsive" alt=""> </div>
+                                                        </div>
+                                                        <form method="POST" action="{% url 'change_profile' %}" enctype="multipart/form-data">
+                                                            {% csrf_token %}
+                                                        <div class="row">
+                                                                <div class="profile-userpic">
+                                                                <input id="myfile" name="profile" onchange="readURL(this);" type="file" style="position:relative;margin-top:20px;margin-left:130px;margin-bottom:20px;" accept="image/*" required/> </div>
+                                                        </div>
+                                                        <div class="row">
+                                                                <div class="profile-userpic">
+                                                                <button type="submit" class="btn btn-success" style="position:relative;margin-top:8px;margin-left:25px;margin-bottom:28px;" > Change </button> </div>
+                                                        </div>
+                                                    </form>
+                                                        
+                                                       
+                                                     </div>   
+                                                    </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       <script>
+            
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+        
+                        reader.onload = function (e) {
+                            $('#myimage').attr('src', e.target.result);
+                        };
+        
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+             
+          
+        
+       </script>
+
+			{% endblock%}  
+       

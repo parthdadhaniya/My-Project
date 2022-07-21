@@ -1,0 +1,146 @@
+{% extends "doctorfinder/base.html" %}
+			{% block content %}
+			
+			 <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Add Patient Information</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Patients</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Add Patient</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                                <div class="card-head">
+                                    <header>Basic Information</header>
+                                     
+				                        
+                                </div>
+                                <div class="card-body" id="bar-parent">
+                                    <form method="POST" action="" id="form_sample_1" class="form-horizontal">
+                                        {% csrf_token %}
+                                        <div class="form-body">
+                                        <div class="form-group row">
+                                                <label class="control-label col-md-3">First Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="firstname" data-required="1" placeholder="enter first name"  class="form-control input-height" required/> </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Last Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="lastname" data-required="1" placeholder="enter last name"  class="form-control input-height" required/> </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Date of Birth
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="date" name="dob"   class="form-control input-height" required/> </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Gender
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="gender" required>
+                                                        <option selected="selected" value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Mobile No.
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input name="mobile" type="number" placeholder="mobile number"  class="form-control input-height" maxlength="10" required/> </div>
+                                            </div>
+                                            
+                                             <div class="form-group row">
+                                                <label class="control-label col-md-3">Street
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <textarea name="street" placeholder="street" class="form-control-textarea" rows="5" ></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">City
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="city" required>
+                                                        
+                                                        <option selected="selected"="Surat">Surat</option>
+                                                        <option value="Vadodara">Vadodara</option>
+                                                        <option value="Ahmedabad">Ahmedabad</option>
+                                                        <option value="Mumbai">Mumbai</option>
+                                                        <option value="Chennai">Chennai</option>
+                                                        <option value="Gandhinagar">Gandhinagar</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+											
+											<div class="form-group row">
+                                                <label class="control-label col-md-3">State
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="state" required>
+                                                        
+                                                        <option selected="selected" value="Gujarat">Gujarat</option>
+                                                        <option value="Maharashtra">Maharashtra</option>
+                                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                                        <option value="Punjab">Punjab</option>
+                                                        <option value="Goa">Goa</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Marital Status 
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="maritalstatus" required>
+                                                        
+                                                        <option selected="selected" value="Single">Single</option>
+                                                        <option value="Married">Married</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+											<div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-success">Add Patient</button>
+                                                    <a href="" class="btn btn-default">Cancel</a>
+                                                </div>
+                                            	</div>
+                                        	</div>
+										</div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			 
+			{% endblock%}           
+			

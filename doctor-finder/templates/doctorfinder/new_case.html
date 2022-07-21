@@ -1,0 +1,289 @@
+{% extends "doctorfinder/base.html" %}
+{% load static %}
+
+<link href="{% static '/doctorfinder/js/jqueryui/jquery-ui.min.css'%}" rel="stylesheet"  type="text/css" />
+<link href="{% static '/doctorfinder/js/jqueryui/jquery-ui.structure.min.css'%}" rel="stylesheet"  type="text/css" />
+<link href="{% static '/doctorfinder/js/jqueryui/jquery-ui.theme.min.css'%}" rel="stylesheet"  type="text/css" />
+{% block content %}
+<style>
+	.mybtn{}
+	
+</style>
+<div class="page-content-wrapper">
+	<div class="page-content">
+		<div class="page-bar">
+			<div class="page-title-breadcrumb">
+				<div class=" pull-left">
+					<div class="page-title">Record a New Case</div>
+				</div>
+				<ol class="breadcrumb page-breadcrumb pull-right">
+						<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+						</li>
+						<li><a class="parent-item" href="#">Case</a>&nbsp;<i class="fa fa-angle-right"></i>
+						</li>
+						<li class="active">Record new Case</li>
+					</ol>
+			</div>
+		</div>
+		<div class="inbox">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card card-topline-gray">
+						<div class="card-body no-padding height-9">
+							<div class="row">
+								<div class="col-md-9">
+									<div class="inbox-body">
+										<div class="inbox-header">
+											<div class="card-body " id="bar-parent10">
+												<form class="form-horizontal" >
+													<div class="form-group ">
+														<label class="col-lg-2 col-md-3 control-label">	Patients</label>
+
+														<div class="col-lg-5 col-md-6">
+															{% if all_patients %}
+															<select class="form-control" id="myselect" required>
+						                    <option value="selectop">Select Patient</option>
+																{% for patients in all_patients %}
+																   	<option value="{{patients.id}}" id="{{patients.id}}">PID-{{patients.id}} {{patients.firstname|title}} {{patients.lastname|title}}</option>
+																{% endfor %}
+																
+															</select>
+															{% endif %}
+														</div>
+														
+													</form>
+													</div>
+
+												</form>
+											</div>
+
+										</div>
+									
+										<div class="inbox-body no-pad">
+											<section class="mail-list">
+												<div class="mail-sender">
+												<form method="GET" action="{% url 'create-new-case' %}" class="form-horizontal" onkeypress="return event.keyCode != 13;" >
+													<div class="form-group">
+														<label>Patient Name</label>
+														<input type="text" class="form-control"  id="patientname"  placeholder="Patient Name" name="patientname"  required onkeypress="return false;">
+													</div>
+													<div class="form-group">
+															<label>Patient Id</label>
+															<input type="text" class="form-control" placeholder="Id" id="patientid"  name="patientid"  required onkeypress="return false;">
+														</div>
+													<div class="form-group">
+															<label>Date of Birth</label>
+															<input type="text" class="form-control" placeholder="Date of Birth" id="patientdob"  name="patientdob"  required onkeypress="return false;">
+														</div>
+														<div class="form-group">
+																<label>Gender</label>
+																<input type="text" class="form-control" placeholder="Gender" id="patientgender" name="patientgender"  required onkeypress="return false;">
+															</div>
+													
+													<div class="form-group">
+														<label>Diseases <span style="color:red;">(Either enter disease)</span></label><br>
+														<input type="text" id="mytext"  name="disease" class="form-control !important" required>
+													</div>
+													<div class="form-group">
+														<label>Symptoms <span style="color:red;">(Enter the symptoms)</span></label><br>
+														<input type="text" id="mytext"  name="symptoms" class="form-control !important" required>
+													</div>
+													<br><br>
+													<a href="" class="btn btn-sm btn-primary">Cancel</a>
+													<button type="submit" class="btn btn-sm btn-success">Prescribe</a>
+												</form>
+												</div>
+											</section>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--<script src="{% static '/doctorfinder/js/myspeechscript.js' %}" ></script>-->
+
+<script type="text/javascript">
+	$(document).on("change", "#myselect" , function(){
+		var selected = $(this).val();
+		if(selected=="Select patient")
+		{
+			$("#patientid").val("");
+			$("#patientname").val("");
+			$("#patientdob").val("");
+			$("#patientgender").val("");
+		}
+		else{
+        $.ajax({
+            type:"GET",
+            data:"id="+selected,
+            url : "{% url 'get-patient-details' %}",
+ 
+            success: function(res){
+							console.log(res);
+								var finalJson=JSON.parse(res)
+								$("#patientid").val(finalJson[0].pk);
+								$("#patientname").val(finalJson[0].fields.firstname+"  "+finalJson[0].fields.lastname+"");
+								$("#patientdob").val(finalJson[0].fields.birthdate);
+								$("#patientgender").val(finalJson[0].fields.gender);
+            }
+		});
+	}
+	});
+	$(document).on("click", "#manipulate" , function(){
+		speechdata = $("#op").val();
+        $.ajax({
+            type:"GET",
+            data:"data="+speechdata,
+            url : '',
+ 
+            success: function(jsonresult){
+				obj=JSON.parse(jsonresult)
+				var len = Object.keys(obj).length;
+				var manipulate="";
+				if(len===0)
+				{
+					manipulate+='<li>'+'<div class="card"><div class="card-header">'+'<span class="label label-danger">' +'Nothing detected'+'</span>'+'</div>'+'<div  class="card-body"style="align:left">'+'No symtoms Detected'+'<br><br>'+'<span class="label label-success">' +'Accuracy:'+'</span>'+' '+'<span class="label label-warning">'+'Not available'+'</span>'+'</div>'+'</li>';
+				}
+				else{
+				for(i=0;i<len;i++)
+				{  
+					manipulate+='<li id="'+(i+1)+'">'+'<div class="card"><div class="card-header">'+'<span class="label label-danger">' +obj[i].disease+'</span>'+'</div>'+'<div  class="card-body"style="align:left">'+obj[i].symptom.replace("{","").replace("}","").replace(/'/g,"")+'<br><br>'+'<span class="label label-success" style="padding:4px 2px;">' +'Accuracy:'+'</span>'+' '+'<span class="label label-warning"  style="padding:4px 2px;">'+obj[i].percentage+' '+'%'+'</span>'+'&nbsp;'+'<a  style="margin-top:8px; padding: 1px 5px;" class="mybtn btn btn-success btn-xs" id="'+obj[i].disease+'"><i class="fa fa-plus" ></i></a>'+'</div>'+'</li>';
+				}
+			}
+				$("#hello").html(manipulate);
+			
+				}
+			
+        });
+	});
+	 $(document).ready(function(){
+		
+			$.ajax({
+				url : '',
+	 			success: function(res){
+					obj=JSON.parse(res)
+					$('#mytext').tagEditor({
+						autocomplete: {
+							delay: 0, 
+							position: { collision: 'flip' }, 
+							source:obj
+						},
+						placeholder: 'Enter Diseases...'
+					});
+					
+				}
+			});
+		
+	 
+});
+$(document).ready(function(){
+	$(document).on('click' , '.mybtn' , function(){	
+	var id = $(this).attr('id');
+	$('#mytext').tagEditor('addTag',id);
+  });
+ 
+});
+  </script>
+  <script>
+	$(document).on("click", "#listen" , function(){
+		var selected = $("#language").val();
+
+       function upgrade() {
+	          alert('Please use Google Chrome to run the application');
+        }
+
+ 
+	if (!(window.webkitSpeechRecognition) && !(window.speechRecognition)) {
+	  upgrade();
+	} else {
+	  var recognizing,
+	  transcription = document.getElementById('speech');
+	  interim_span = document.getElementById('interim');
+
+	  interim_span.style.opacity = '0.5';
+
+
+	  function reset() {
+		recognizing = false;
+		speech.start();
+	  }
+
+	  var speech = new webkitSpeechRecognition() || speechRecognition();
+
+	  speech.continuous = true;
+	  speech.interimResults = true;
+	  speech.lang =selected;
+	  speech.start(); 
+
+	  speech.onstart = function() {
+		 
+		  recognizing = true;
+	  };
+
+	  speech.onresult = function(event) {
+		
+		var interim_transcript = '';
+		var final_transcript = '';
+
+		
+		for (var i = event.resultIndex; i < event.results.length; ++i) {
+		  if (event.results[i].isFinal) {
+			final_transcript += event.results[i][0].transcript;
+		  } else {
+			
+			interim_transcript += event.results[i][0].transcript;
+		  }
+		}
+		
+		transcription.innerHTML = final_transcript;
+		interim_span.innerHTML = interim_transcript;
+		var a=transcription.innerHTML;
+		var b=document.getElementById('opt').value;
+		document.getElementById('opt').value=b+a;
+	  };
+
+	  speech.onerror = function(event) {
+		 console.error(event.error);
+	  };
+
+	  speech.onend = function() {
+		  reset();
+	  };
+
+	}
+  
+
+
+	});
+
+
+
+  </script>
+  <script>
+	$(document).on("click", "#translate" , function(){
+		speechdata = $("#opt").val();
+        $.ajax({
+            type:"GET",
+            data:"data="+speechdata,
+            url : '',
+ 
+            success: function(jsonresult){
+				obj=JSON.parse(jsonresult)
+				$("#op").val(obj['translatedText'])
+				
+			
+		}
+	});
+	});
+
+  </script>
+  <script src="{% static '/doctorfinder/js/jqueryui/jquery-ui.min.js' %}" ></script>
+  
+	{% endblock%}
+					
+					

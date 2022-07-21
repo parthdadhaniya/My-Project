@@ -1,0 +1,208 @@
+{% extends "doctorfinder/base.html" %}
+			{% block content %}
+			
+			 <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Edit Patient Information</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Patients</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Edit Patient</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                                <div class="card-head">
+                                    <header>Basic Information</header>
+                                     
+				                        
+                                </div>
+                                <div class="card-body" id="bar-parent">
+                                    <form method="POST" action="" id="form_sample_1" class="form-horizontal">
+                                        {% csrf_token %}
+                                        {% if patient_info %}
+                                        <div class="form-body">
+                                        <div class="form-group row">
+                                        <label class="control-label col-md-3">Patient ID
+                                            <span class="required"> * </span>
+                                        </label>
+                                            <div class="col-md-5">
+                                                <input type="text" value="{{patient_info.id}}" name="id" data-required="1"   class="form-control input-height" readonly/> </div>
+                                        </div>
+                                        <div class="form-group row">
+                                                <label class="control-label col-md-3">First Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" value="{{patient_info.firstname}}" name="firstname" data-required="1" placeholder="enter first name"  class="form-control input-height" required/> </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Last Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" value="{{patient_info.lastname}}" name="lastname" data-required="1" placeholder="enter last name"  class="form-control input-height" required/> </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Gender
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="gender" required>
+                                                            <option selected="selected" value="{{patient_info.gender}}">{{patient_info.gender}}</option>
+                                                        <option  value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Mobile No.
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input name="mobile" value="{{patient_info.mobile}}" type="number" placeholder="mobile number"  class="form-control input-height" maxlength="10" required/> </div>
+                                            </div>
+                                            
+                                             <div class="form-group row">
+                                                <label class="control-label col-md-3">Street
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <textarea name="street"  placeholder="street" class="form-control-textarea" rows="5" >{{patient_info.street}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">City
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="city" required>
+                                                        <option selected="selected" value="{{patient_info.city}}">{{patient_info.city}}</option>
+                                                        <option value="Surat">Surat</option>
+                                                        <option value="Vadodara">Vadodara</option>
+                                                        <option value="Ahmedabad">Ahmedabad</option>
+                                                        <option value="Mumbai">Mumbai</option>
+                                                        <option value="Chennai">Chennai</option>
+                                                        <option value="Gandhinagar">Gandhinagar</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+											
+											<div class="form-group row">
+                                                <label class="control-label col-md-3">State
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="state" required>
+                                                        <option  selected="selected" value="{{patient_info.state}}">{{patient_info.state}}</option>
+                                                        <option  value="Gujarat">Gujarat</option>
+                                                        <option value="Maharashtra">Maharashtra</option>
+                                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                                        <option value="Punjab">Punjab</option>
+                                                        <option value="Goa">Goa</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+											
+											<div class="form-group row">
+                                                <label class="control-label col-md-3">Country
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="country" required>
+                                                        <option selected="selected" value="{{patient_info.country}}">{{patient_info.country}}</option>
+                                                        <option  value="India">India</option>
+                                                        <option value="U.S">U.S</option>
+                                                        <option value="U.K">U.K</option>
+                                                        <option value="Australia">Australia</option>
+                                                        <option value="New Zealand">New Zealand</option>
+                                                        <option value="West Indies">West Indies</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Marital Status 
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="maritalstatus" required>
+                                                        <option selected="selected" value="{{patient_info.marital_status}}">{{patient_info.marital_status}}</option>
+                                                        <option value="Single">Single</option>
+                                                        <option value="Married">Married</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Blood Group
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="bloodgroup" required>
+                                                        <option selected="selected" value="{{patient_info.blood_group}}">{{patient_info.blood_group}}</option>
+                                                        <option value="A+">A+</option>
+                                                        <option value="A-">A-</option>
+                                                        <option value="B+">B+</option>
+                                                        <option value="B-">B-</option>
+                                                        <option value="AB+">AB+</option>
+                                                        <option value="AB-">AB-</option>
+                                                        <option value="O+">O+</option>
+                                                        <option value="O-">O-</option>	
+                                                    </select>
+                                                </div>
+                                            </div>
+                                         	<div class="form-group row">
+                                                 <label class="control-label col-md-3">Blood Presure
+                                                 </label>
+                                                 <div class="col-md-5">
+                                                     <input type="number" value="{{patient_info.bloodpresure|default:''}}" class="form-control input-height" placeholder="blood presure" name="bloodpresure" maxlength="3">
+                                                 </div>
+                                             </div>
+											<div class="form-group row">
+                                                <label class="control-label col-md-3">Sugar
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="number" value="{{patient_info.sugar|default:''}}" class="form-control input-height" placeholder="sugar" name="sugar" maxlength="3" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                 <label class="control-label col-md-3">Haemoglobin
+                                                 </label>
+                                                 <div class="col-md-5">
+                                                     <input type="number" value="{{patient_info.haemoglobin|default:''}}" class="form-control input-height" placeholder="Haemoglobin" name="haemoglobin" maxlength="2">
+                                                 </div>
+                                             </div>
+											<div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-success">Update Details</button>
+                                                    <a href="" class="btn btn-default">Cancel</a>
+                                                </div>
+                                            	</div>
+                                        	</div>
+                                        </div>
+                                      
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			 
+			{% endblock%}           
+			

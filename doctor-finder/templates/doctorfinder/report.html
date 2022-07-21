@@ -1,0 +1,105 @@
+{% extends "enterprise/base.html" %}
+			{% block content %}
+		
+
+
+			 <div class="page-content-wrapper">
+			 
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Report</div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                                <div class="card-head">
+                                    <header>Basic Information</header>
+                                     
+				                        
+                                </div>
+                                <div class="card-body" id="bar-parent">
+                                    <form action="{% url 'add_report_to_database' %}" method="POST" id="form_sample_1" class="form-horizontal" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-body">
+                                            {% if case_info %}    
+                                            <div class="form-group row">
+                                                        <label class="control-label col-md-3">Case Id
+                                                            <span class="required"> * </span>
+                                                        </label>
+                                                        <div class="col-md-5">
+                                                            <input type="text" value="{{case_info}}" name="caseid" data-required="1"   class="form-control input-height" readonly/> </div>
+                                                    </div>
+                                            {% endif %}
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Report Type
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="report_type">
+                                                        
+                                                        <option selected="selected" value="Blood Report">Blood Report</option>
+                                                        <option value="MRI">MRI</option>
+														<option value="City scan">City scan</option>
+                                                        <option value="Sonography">Sonography</option>
+                                                        <option value="Urine Report">Urine Report</option>
+                                                    </select>
+                                                </div>
+												
+												
+                                            </div>
+											
+											<div class="form-group row">
+                                                <label class="control-label col-md-3">Upload Report
+                                                </label>
+                                                <div class="col-md-5">
+                                                  <input type="file" name="report_url" required accept="application/pdf, image/* ">
+                                              </div>
+                                            </div>
+											
+											<div class="form-group row">
+                                                <label class="control-label col-md-3">Diagnosis
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <select class="form-control input-height" name="diagnosis">
+                                                        
+                                                        <option  value="Positive">Positive</option>
+                                                        <option selected="selected" value="Negative">Negative</option>
+														
+                                                    </select>
+                                                </div>
+												
+												
+                                            </div>
+											
+											<div class="form-group row">
+                                                <label class="control-label col-md-3">Comments
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <textarea name="comments"  class="form-control-textarea" rows="5" required></textarea>
+                                                </div>
+                                            </div>
+											<div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-info">Upload</button>
+                                                    <a href="{% url 'all_patients'%}" class="btn btn-default">Cancel</a>
+                                                </div>
+                                            	</div>
+                                        	</div>
+										</div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			{% endblock%} 

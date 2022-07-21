@@ -1,0 +1,79 @@
+{% extends "enterprise/base.html" %}
+			<!-- start page content -->
+			{% block content %}
+			
+			<div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Edit Disease</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+									<li><a class="parent-item" href="#">Diseases</a>&nbsp;<i class="fa fa-angle-right"></i>
+									</li>
+                                <li class="active">Edit Disease</li>
+                            </ol>
+                        </div>
+                    </div>
+					<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<div class="card card-box">
+									<div class="card-head">
+										<header>Disease Information</header>
+										 </div>
+					                <div class="card-body" id="bar-parent">
+                                    <form method="GET" action=" {% url 'update_disease' %}"id="form_sample_1" class="form-horizontal">
+										<br><br>
+										{% csrf_token %}
+										{% if disease_data %}
+                                        <div class="form-body">
+												
+										<div class="form-group row">
+														<label class="control-label col-md-3">Disease ID
+															<span class="required"> * </span>
+														</label>
+														<div class="col-md-5">
+															<input type="text" name="disease_id" data-required="1"  class="form-control input-height" value="{{disease_data.id}}"readonly/> </div>
+													</div>
+
+                                        <div class="form-group row">
+                                                <label class="control-label col-md-3">Disease name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="disease" data-required="1"  class="form-control input-height" value="{{disease_data.disease_name}}"/> </div>
+                                            </div>
+                                           
+                                            
+											<div class="form-group row">
+                                                <label class="control-label col-md-3">Symptoms
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <textarea name="symptoms"  class="form-control-textarea" rows="5" value="{{disease_data.symptom}}">{{disease_data.symptom}}</textarea>
+                                                </div>
+                                            </div>
+											
+											<div class="form-actions">
+                                            <div class="row">
+												<div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-info">Update</button>
+													<a href="{% url 'all_diseases' %}"  class="btn btn-default" value="cancel" >Cancel</a>
+                                                </div>
+                                            	</div>
+                                        	</div>
+											</div>
+											{% else %}
+											<h4>No data available for this disease</h4>
+											{% endif %}
+										</form>
+									</div>
+								</div>			
+							</div>
+						</div>
+					</div>
+</div>
+			{% endblock%}  
+       
